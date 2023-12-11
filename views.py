@@ -66,12 +66,7 @@ class View:
 
   def consulta_excluir(id):
     NConsulta.excluir(Consulta(id, "", "", 0, 0))
-
-#   def consulta_periodo(obj, inicio, final):
-#     data_inicio = datetime.datetime.strptime(f"{inicio} 00:00", "%d/%m/%Y %H:%M")
-#     data_fim = datetime.datetime.strptime(f"{final} 23:59", "%d/%m/%Y %H:%M")
-#     if data_inicio <= obj.get_data() <= data_fim: return True
-
+    
   def consulta_solicitados():
     r = []
     for obj in NConsulta.listar_nao_confirmados():
@@ -79,19 +74,19 @@ class View:
     return r
   
   def medico_listar():
-    return NPaciente.listar()
+    return NMedico.listar()
   
   def medico_listar_id(id):
-    return NPaciente.listar_id(id)
+    return NMedico.listar_id(id)
   
   def medico_inserir(nome, fone, email, senha):
-    medico = Paciente(0, nome, fone, email, senha)
-    NPaciente.inserir(medico)
+    medico = Medico(0, nome, fone, email, senha)
+    NMedico.inserir(medico)
 
   def medico_atualizar(id, nome, fone, email, senha):
-    medico = Paciente(id, nome, fone, email, senha)
-    NPaciente.atualizar(medico)
+    medico = Medico(id, nome, fone, email, senha)
+    NMedico.atualizar(medico)
     
   def medico_excluir(id):
-    medico = Paciente(id, "", "", "", "")
-    NPaciente.excluir(medico)    
+    medico = Medico(id, "", "", "", "")
+    NMedico.excluir(medico)    

@@ -1,7 +1,14 @@
 from templates.entrarUI import EntrarUI
-# from templates.manterpacienteUI import ManterPacienteUI
-from templates.editarperfilUI import EditarPerfilUI
+from templates.manterpacienteUI import ManterPacienteUI
+from templates.mantermedicoUI import ManterMedicoUI
+from templates.manterconsultaUI import ManterConsultaUI
+from templates.minhasconsultasUI import MinhasConsultasUI
+from templates.solicitarconsultaUI import SolicitarConsultaUI
+from templates.confirmarconsultaUI import ConfirmarConsultaUI
 from templates.remarcarconsultaUI import RemarcarConsultaUI
+from templates.cancelarconsultaUI import CancelarConsultaUI
+from templates.consultasmesUI import ConsultasMesUI
+from templates.editarperfilUI import EditarPerfilUI
 from templates.abrircontaUI import AbrirContaUI
 from views import View
 
@@ -16,20 +23,20 @@ class IndexUI:
 
   def menu_admin():
     op = st.sidebar.selectbox("Menu", ["Manter Consultas", "Manter Pacientes", "Manter Médicos", "Consultas do Mês", "Confirmar Consultas", "Editar Perfil"])
-    # if op == "Manter Consultas": ManterConsultaUI.main()
-    # if op == "Manter Pacientes": ManterPacienteUI.main()
-    # if op == "Manter Médicos": ManterMedicoUI.main()
-    # if op == "Consultas do Mês": ConsultasMêsUI.main()
-    # if op == "Confirmar Consultas": ConfirmarConsultaUI.main()
+    if op == "Manter Consultas": ManterConsultaUI.main()
+    if op == "Manter Pacientes": ManterPacienteUI.main()
+    if op == "Manter Médicos": ManterMedicoUI.main()
+    if op == "Consultas do Mês": ConsultasMesUI.main()
+    if op == "Confirmar Consultas": ConfirmarConsultaUI.main()
     if op == "Editar Perfil": EditarPerfilUI.main()
 
 
   def menu_paciente():
     op = st.sidebar.selectbox("Menu", ["Minhas Consultas", "Solicitar Consulta", "Remarcar Consulta", "Cancelar Consulta", "Editar Perfil"])
-    # if op == "Minhas Consultas": ConsultasHojeUI.main()
-    # if op == "Solicitar Consulta": ConsultasHojeUI.main()
+    if op == "Minhas Consultas": MinhasConsultasUI.main()
+    if op == "Solicitar Consulta": SolicitarConsultaUI.main()
     if op == "Remarcar Consulta": RemarcarConsultaUI.main()
-    # if op == "Cancelar Consulta": ConsultasHojeUI.main()
+    if op == "Cancelar Consulta": CancelarConsultaUI.main()
     if op == "Editar Perfil": EditarPerfilUI.main()
 
   def btn_logout():
