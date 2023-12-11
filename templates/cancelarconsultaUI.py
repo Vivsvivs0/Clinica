@@ -8,4 +8,4 @@ class CancelarConsultaUI:
     CancelarConsultaUI.cancelar()
 
   def cancelar():
-    st.write("Código a programar")
+    st.write("nada ainda")

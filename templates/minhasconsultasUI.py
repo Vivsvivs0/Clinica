@@ -8,4 +8,4 @@ class MinhasConsultasUI:
     MinhasConsultasUI.listar()
 
   def listar():
-    st.write("Código a programar")
+    st.write("nada ainda")
