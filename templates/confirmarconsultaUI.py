@@ -8,4 +8,7 @@ class ConfirmarConsultaUI:
     ConfirmarConsultaUI.confirmar()
 
   def confirmar():
-    st.write("nada ainda").
+    st.write("lista das consultas nao confirmadas")
+    consulta = st.selectbox("Consulta escolhida", View.consulta_nao_confirmada())
+    if st.button("Confirmar"):
+      st.write("nada ainda")

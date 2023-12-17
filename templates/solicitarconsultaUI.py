@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 from views import View
 
 class SolicitarConsultaUI:
@@ -8,4 +7,7 @@ class SolicitarConsultaUI:
     SolicitarConsultaUI.solicitar()
 
   def solicitar():
-    st.write("nada ainda")
+    medico = st.selectbox("Médico escolhido", View.medico_listar())
+    data = st.text_input("Data DD/MM/AAAA HH\:MM")
+    if st.button("Solicitar"):
+      st.write("nada ainda")

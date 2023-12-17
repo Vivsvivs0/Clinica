@@ -12,10 +12,26 @@ class ManterConsultaUI:
         with tab3: ManterConsultaUI.atualizar()
         with tab4: ManterConsultaUI.excluir()
     def listar():
-        st.write("nada ainda")
+        if len(View.consulta_listar()) > 0:
+            dic = []
+            for obj in View.consulta_listar(): dic.append(obj.to_json())
+            df = pd.DataFrame(dic)
+            st.dataframe(df)
+        else:
+            st.write("Nenhuma consulta cadastrada")
     def inserir():
-        st.write("nada ainda")
+        data = st.text_input("Data da consulta DD/MM/AAAA HH\:MM")
+        medico = st.selectbox("Medico", View.medico_listar())
+        paciente = st.selectbox("Paciente", View.paciente_listar())
+        if st.button("Inserir"):
+             st.write("nada ainda")
     def atualizar():
-        st.write("nada ainda")
+        data = st.text_input("Nova data da consulta DD/MM/AAAA HH\:MM")
+        medico = st.selectbox("Novo medico", View.medico_listar())
+        paciente = st.selectbox("Novo paciente", View.paciente_listar())
+        if st.button("Atualizar"):
+            st.write("nada ainda")
     def excluir():
-        st.write("nada ainda")
+        op = st.selectbox("Exclusão de horários", View.consulta_listar())
+        if st.button("Excluir"):
+            st.write("nada ainda")

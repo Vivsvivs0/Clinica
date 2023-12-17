@@ -8,4 +8,4 @@ class ConsultasMesUI:
     ConsultasMesUI.listar()
 
   def listar():
-    st.write("nada ainda")
+    st.write("lista as consultas marcadas no mês")
