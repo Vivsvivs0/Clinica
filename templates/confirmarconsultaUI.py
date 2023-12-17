@@ -8,4 +8,4 @@ class ConfirmarConsultaUI:
     ConfirmarConsultaUI.confirmar()
 
   def confirmar():
-    st.write("nada ainda")
+    st.write("nada ainda").
