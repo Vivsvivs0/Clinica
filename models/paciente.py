@@ -1,4 +1,5 @@
 import json
+from modelo import Modelo
 
 class Paciente:
   def __init__(self, id, nome, fone, email, senha):
@@ -29,56 +30,11 @@ class Paciente:
     return f"{self.__id} - {self.__nome} - {self.__fone} - {self.__email}"
 
 
-class NPaciente:
-  __pacientes = []
-
-  @classmethod
-  def inserir(cls, obj):
-    cls.abrir()
-    id = 0
-    for aux in cls.__pacientes:
-      if aux.get_id() - id == 1:
-        id = aux.get_id()
-      else:
-        break
-    obj.set_id(id + 1)
-    cls.__pacientes.append(obj)
-    cls.salvar()
-
-  @classmethod
-  def listar(cls):
-    cls.abrir()
-    return cls.__pacientes
-
-  @classmethod
-  def listar_id(cls, id):
-    cls.abrir()
-    for obj in cls.__pacientes:
-      if obj.get_id() == id: return obj
-    return None
-
-  @classmethod
-  def atualizar(cls, obj):
-    cls.abrir()
-    aux = cls.listar_id(obj.get_id())
-    if aux is not None:
-      aux.set_nome(obj.get_nome())
-      aux.set_fone(obj.get_fone())
-      aux.set_email(obj.get_email())
-      aux.set_senha(obj.get_senha())
-      cls.salvar()
-
-  @classmethod
-  def excluir(cls, obj):
-    cls.abrir()
-    aux = cls.listar_id(obj.get_id())
-    if aux is not None:
-      cls.__pacientes.remove(aux)
-      cls.salvar()
+class NPaciente(Modelo):
 
   @classmethod
   def abrir(cls):
-    cls.__pacientes = []
+    cls.objetos = []
     try:
       with open("pacientes.json", mode="r") as arquivo:
         pacientes_json = json.load(arquivo)
@@ -88,11 +44,11 @@ class NPaciente:
                         obj["_Paciente__fone"],
                         obj["_Paciente__email"],
                         obj["_Paciente__senha"])
-          cls.__pacientes.append(aux)
+          cls.objetos.append(aux)
     except FileNotFoundError:
       pass
 
   @classmethod
   def salvar(cls):
     with open("pacientes.json", mode="w") as arquivo:
-      json.dump(cls.__pacientes, arquivo, default=vars)
+      json.dump(cls.objetos, arquivo, default=vars)
