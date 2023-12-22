@@ -1,5 +1,6 @@
 import json
 import datetime
+from modelo import Modelo
 
 class Consulta:
   def _init_(self, id, confirmado, data, id_medico, id_paciente):
@@ -38,64 +39,11 @@ class Consulta:
       'id_paciente': self.__id_paciente}
 
 
-class NConsulta:
-  __consultas = []
-
-  @classmethod
-  def inserir(cls, obj):
-    cls.abrir()
-    id = 0
-    for aux in cls.__consultas:
-      if aux.get_id() > id: id = aux.get_id()
-    obj.set_id(id + 1)
-    cls.__consultas.append(obj)
-    cls.salvar()
-
-  @classmethod
-  def listar(cls):
-    cls.abrir()
-    return cls.__consultas
-
-  @classmethod
-  def listar_nao_confirmados(cls):
-    cls.abrir()
-    nao_confirmados = []
-    aux = datetime.datetime.now()
-    hoje = datetime.datetime(aux.year, aux.month, aux.day)
-    for obj in cls.__consultas:
-      if not obj.get_confirmado() and obj.get_data() > hoje:
-        nao_confirmados.append(obj)
-    return nao_confirmados
-
-  @classmethod
-  def listar_id(cls, id):
-    cls.abrir()
-    for obj in cls.__consultas:
-      if obj.get_id() == id: return obj
-    return None
-
-  @classmethod
-  def atualizar(cls, obj):
-    cls.abrir()
-    aux = cls.listar_id(obj.get_id())
-    if aux is not None:
-      aux.set_confirmado(obj.get_confirmado())
-      aux.set_data(obj.get_data())
-      aux.set_id_medico(obj.get_id_medico())
-      aux.set_id_paciente(obj.get_id_paciente())
-      cls.salvar()
-
-  @classmethod
-  def excluir(cls, obj):
-    cls.abrir()
-    aux = cls.listar_id(obj.get_id())
-    if aux is not None:
-      cls.__consultas.remove(aux)
-      cls.salvar()
+class NConsulta(Modelo):
 
   @classmethod
   def abrir(cls):
-    cls.__consultas = []
+    cls.objetos = []
     try:
       with open("consultas.json", mode="r") as arquivo:
         consultas_json = json.load(arquivo)
@@ -104,11 +52,11 @@ class NConsulta:
             obj["id"], obj["confirmado"],
             datetime.datetime.strptime(obj["data"], "%d/%m/%Y %H:%M"),
             obj["id_medico"], obj["id_paciente"])
-          cls.__consultas.append(aux)
+          cls.objetos.append(aux)
     except FileNotFoundError:
       pass
 
   @classmethod
   def salvar(cls):
     with open("consultas.json", mode="w") as arquivo:
-      json.dump(cls.__consultas, arquivo, default=Consulta.to_json)
+      json.dump(cls.objetos, arquivo, default=Consulta.to_json)
