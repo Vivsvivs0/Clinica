@@ -42,6 +42,15 @@ class Consulta:
 class NConsulta(Modelo):
 
   @classmethod
+  def listar_nao_confirmados(cls):
+    cls.abrir()
+    r = []
+    for con in NConsulta.listar():
+      if not con.get_confirmado:
+        r.append(con)
+    return r
+
+  @classmethod
   def abrir(cls):
     cls.objetos = []
     try:
