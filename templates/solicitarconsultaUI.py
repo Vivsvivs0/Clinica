@@ -3,10 +3,10 @@ import pandas as pd
 from views import View
 import datetime
 
-class SolicitarUI:
+class SolicitarConsultaUI:
     def main():
         st.header("Solicitar consulta")
-        SolicitarUI.solicitar()
+        SolicitarConsultaUI.solicitar()
     def solicitar():
         if len(View.medico_listar()) > 0:
             medico = st.selectbox("Médico desejado", View.medico_listar())
