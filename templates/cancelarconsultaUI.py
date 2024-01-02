@@ -11,4 +11,5 @@ class CancelarConsultaUI:
     st.write("lista das consultas da pessoa aqui")
     consulta = st.selectbox("Consulta escolhida", View.consulta_listar_paciente(View.paciente_listar_id(st.session_state["paciente_id"])))
     if st.button("Cancelar"):
-      st.write("nada ainda")
+      View.consulta_excluir(consulta.get_id())
+      st.success("Consulta cancelada com sucesso")

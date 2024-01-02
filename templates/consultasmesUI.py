@@ -8,4 +8,10 @@ class ConsultasMesUI:
     ConsultasMesUI.listar()
 
   def listar():
-    st.write("lista as consultas marcadas no mês")
+    if len(View.consulta_listar_mes()) != 0:
+      dic = []
+      for obj in View.consulta_listar_mes: dic.append(obj.to_json())
+      df = pd.DataFrame(dic)
+      st.dataframe(df)
+    else:
+      st.write("Não há consultas marcadas esse mês")

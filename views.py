@@ -3,6 +3,7 @@ from models.medico import Medico, NMedico
 from models.consulta import Consulta, NConsulta
 import datetime
 
+
 class View:
   def paciente_listar():
     return NPaciente.listar()
@@ -46,9 +47,8 @@ class View:
   def consulta_listar_mes():
     r = []
     hoje = datetime.datetime.today()
-    fds = hoje + datetime.timedelta(days = 30)
     for horario in View.consulta_listar():
-      if fds.date() >= horario.get_data().date() >= hoje.date():
+      if hoje.month() == horario.month() and hoje.year() == horario.year() and horario.get_confirmado() == True:
         r.append(horario)
     return r 
   
@@ -79,14 +79,22 @@ class View:
   def medico_listar_id(id):
     return NMedico.listar_id(id)
   
-  def medico_inserir(nome, fone, email, senha):
-    medico = Medico(0, nome, fone, email, senha)
+  def medico_inserir(nome, fone, email):
+    medico = Medico(0, nome, fone, email)
     NMedico.inserir(medico)
 
-  def medico_atualizar(id, nome, fone, email, senha):
-    medico = Medico(id, nome, fone, email, senha)
+  def medico_atualizar(id, nome, fone, email):
+    medico = Medico(id, nome, fone, email)
     NMedico.atualizar(medico)
     
   def medico_excluir(id):
-    medico = Medico(id, "", "", "", "")
-    NMedico.excluir(medico)    
+    medico = Medico(id, "", "", "")
+    NMedico.excluir(medico)
+
+  def medico_disponivel(medico, data):
+    for con in View.consulta_listar():
+      if con.get_id_medico() == medico.get_id():
+          fim = con.get_data() + datetime.timedelta(minutes=15)
+          if con.get_data() <= data <= fim:
+            return False
+    return True

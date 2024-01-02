@@ -24,15 +24,23 @@ class ManterPacienteUI:
         email = st.text_input("Email do paciente")
         senha = st.text_input("Senha do paciente")
         if st.button("Inserir"):
-             st.write("nada ainda")
+             View.paciente_inserir(nome, fone, email, senha)
+             st.success("Paciente inserido com sucesso")
     def atualizar():
-        nome = st.text_input("Novo nome do paciente")
-        fone = st.text_input("Novo fone do paciente")
-        email = st.text_input("Novo email do paciente")
-        senha = st.text_input("Nova senha do paciente")
-        if st.button("Atualizar"):
-            st.write("nada ainda")
+        pacientes = View.paciente_listar()
+        if len(pacientes) == 0:
+            st.write("Nenhum paciente cadastrado")
+        else:
+            op = st.selectbox("Atualização de paciente", pacientes)
+            nome = st.text_input("Novo nome do paciente")
+            fone = st.text_input("Novo fone do paciente")
+            email = st.text_input("Novo email do paciente")
+            senha = st.text_input("Nova senha do paciente")
+            if st.button("Atualizar"):
+                View.paciente_atualizar(op.get_id(), nome, fone, email, senha)
+                st.success("Paciente atualizado com sucesso")
     def excluir():
         op = st.selectbox("Exclusão de pacientes", View.paciente_listar())
         if st.button("Excluir"):
-            st.write("nada ainda")
+            View.paciente_excluir(op.get_id())
+            st.success("Paciente excluído com sucesso")

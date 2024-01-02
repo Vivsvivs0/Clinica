@@ -24,14 +24,22 @@ class ManterConsultaUI:
         medico = st.selectbox("Medico", View.medico_listar())
         paciente = st.selectbox("Paciente", View.paciente_listar())
         if st.button("Inserir"):
-             st.write("nada ainda")
+             View.consulta_inserir(data, True, paciente.get_id(), medico.get_id())
+             st.success("Consulta inserida com sucesso")
     def atualizar():
-        data = st.text_input("Nova data da consulta DD/MM/AAAA HH\:MM")
-        medico = st.selectbox("Novo medico", View.medico_listar())
-        paciente = st.selectbox("Novo paciente", View.paciente_listar())
-        if st.button("Atualizar"):
-            st.write("nada ainda")
+        consulta = View.consulta_listar()
+        if len(consulta) == 0:
+            st.write("Nenhuma consulta cadastrada")
+        else:
+            op = st.selectbox("Atualização de consulta", consulta)
+            data = st.text_input("Nova data da consulta DD/MM/AAAA HH\:MM")
+            medico = st.selectbox("Novo medico", View.medico_listar())
+            paciente = st.selectbox("Novo paciente", View.paciente_listar())
+            if st.button("Atualizar"):
+                View.consulta_atualizar(op.get_id(), data, True, paciente.get_id(), medico.get_id())
+                st.success("Consulta atualizada com sucesso")
     def excluir():
         op = st.selectbox("Exclusão de horários", View.consulta_listar())
         if st.button("Excluir"):
-            st.write("nada ainda")
+            View.consulta_excluir(op.get_id())
+            st.success("Consulta excluída com sucesso")

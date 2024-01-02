@@ -11,4 +11,5 @@ class ConfirmarConsultaUI:
     st.write("lista das consultas nao confirmadas")
     consulta = st.selectbox("Consulta escolhida", View.consulta_nao_confirmada())
     if st.button("Confirmar"):
-      st.write("nada ainda")
+      View.consulta_atualizar(consulta.get_id(), consulta.get_data(), True, consulta.get_id_paciente(), consulta.get_id_medico())
+      st.success("Consulta confirmada com sucesso")

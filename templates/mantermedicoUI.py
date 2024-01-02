@@ -23,14 +23,22 @@ class ManterMedicoUI:
         fone = st.text_input("Fone do médico")
         email = st.text_input("Email do médico")
         if st.button("Inserir"):
-             st.write("nada ainda")
+             View.medico_inserir(nome, fone, email)
+             st.success("Médico inserido com sucesso")
     def atualizar():
-        nome = st.text_input("Novo nome do médico")
-        fone = st.text_input("Novo fone do médico")
-        email = st.text_input("Novo email do médico")
-        if st.button("Atualizar"):
-            st.write("nada ainda")
+        medicos = View.medico_listar
+        if len(medicos) == 0:
+            st.write("Nenhum médico cadastrado")
+        else:
+            op = st.selectbox("Atualização de médico", medicos)
+            nome = st.text_input("Novo nome do médico")
+            fone = st.text_input("Novo fone do médico")
+            email = st.text_input("Novo email do médico")
+            if st.button("Atualizar"):
+                View.medico_atualizar(op.get_id(), nome, fone, email)
+                st.success("Médico atualizado com sucesso")
     def excluir():
         op = st.selectbox("Exclusão de médicos", View.medico_listar())
         if st.button("Excluir"):
-            st.write("nada ainda")
+            View.medico_excluir(op.get_id())
+            st.success("Médico excluído do sistema")

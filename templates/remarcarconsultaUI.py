@@ -10,6 +10,7 @@ class RemarcarConsultaUI:
   def remarcar():
     st.write("lista das consultas da pessoa aqui")
     consulta = st.selectbox("Consulta escolhida", View.consulta_listar_paciente(View.paciente_listar_id(st.session_state["paciente_id"])))
-    data = st.text_input("Nova data DD/MM/AAAA HH:MM")
+    data = st.text_input("Nova data DD/MM/AAAA HH\:MM")
     if st.button("Remarcar"):
-      st.write("nada ainda")
+      View.consulta_atualizar(consulta.get_id(), data, False, st.session_state['id_paciente'])
+      st.success("Consulta atualizada com sucesso")
