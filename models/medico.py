@@ -1,5 +1,5 @@
 import json
-from modelo import Modelo
+from models.modelo import Modelo
 
 
 class Medico:

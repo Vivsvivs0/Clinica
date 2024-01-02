@@ -1,6 +1,6 @@
 import json
 import datetime
-from modelo import Modelo
+from models.modelo import Modelo
 
 class Consulta:
   def _init_(self, id, confirmado, data, id_paciente, id_medico):
