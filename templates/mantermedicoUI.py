@@ -13,7 +13,7 @@ class ManterMedicoUI:
     def listar():
         if len(View.medico_listar()) > 0:
             dic = []
-            for obj in View.medico_listar(): dic.append(obj._dict_)
+            for obj in View.medico_listar(): dic.append(obj.to_json())
             df = pd.DataFrame(dic)
             st.dataframe(df)
         else:
@@ -26,7 +26,7 @@ class ManterMedicoUI:
              View.medico_inserir(nome, fone, email)
              st.success("Médico inserido com sucesso")
     def atualizar():
-        medicos = View.medico_listar
+        medicos = View.medico_listar()
         if len(medicos) == 0:
             st.write("Nenhum médico cadastrado")
         else:

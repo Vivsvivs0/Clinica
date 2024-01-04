@@ -26,6 +26,14 @@ class Medico:
 
   def __str__(self):
     return f"{self.__id} - {self.__nome} - {self.__fone} - {self.__email}"
+  
+  def to_json(self):
+    return {
+      'id': self.__id,
+      'nome': self.__nome,
+      'fone': self.__fone,
+      'email': self.__email
+    }
 
 
 class NMedico(Modelo):

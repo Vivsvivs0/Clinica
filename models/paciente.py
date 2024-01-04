@@ -27,7 +27,16 @@ class Paciente:
     return False
 
   def __str__(self):
-    return f"{self.__id} - {self.__nome} - {self.__fone} - {self.__email}"
+    return f"{self.__id} - {self.__nome} - {self.__fone} - {self.__email} - {self.__senha}"
+
+  def to_json(self):
+    return {
+      'id': self.__id,
+      'nome': self.__nome,
+      'fone': self.__fone,
+      'email': self.__email,
+      'senha': self.__senha
+    }
 
 
 class NPaciente(Modelo):

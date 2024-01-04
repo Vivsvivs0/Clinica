@@ -13,7 +13,7 @@ class ManterPacienteUI:
     def listar():
         if len(View.paciente_listar()) > 0:
             dic = []
-            for obj in View.paciente_listar(): dic.append(obj._dict_)
+            for obj in View.paciente_listar(): dic.append(obj.to_json())
             df = pd.DataFrame(dic)
             st.dataframe(df)
         else:
